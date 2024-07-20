@@ -13,6 +13,7 @@ import FreeSheet from './page/FreeSheet.jsx'
 import AddQuestion from './page/AddQuestion.jsx'
 import Question from './page/Question.jsx'
 import EditQuestion from './page/EditQuestion.jsx'
+import User from './component/User.jsx'
 
 const router = createBrowserRouter([
     {
@@ -25,6 +26,7 @@ const router = createBrowserRouter([
         { path: '/AddQuestion', element:<AuthLayout authentication>{" "} <AddQuestion /> </AuthLayout> },
         { path: "/question/:serialNo" , element:<Question /> },
         { path: "/edit-question/:serialNo", element: <AuthLayout authentication> <EditQuestion /> </AuthLayout> }, 
+        { path: "/profile/:userId", element: <AuthLayout authentication> <User /> </AuthLayout> }, 
       ]
     }
 ])

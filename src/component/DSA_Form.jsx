@@ -8,7 +8,6 @@ const DSA_Headers = () => {
   const [expanded, setExpanded] = useState(false);
   const [items, setItems] = useState([]);
   const [searchTerms, setSearchTerms] = useState({});
-  const [randomQuestion, setRandomQuestion] = useState(null);
   const [searchResults, setSearchResults] = useState({});
   const navigate = useNavigate();
   const titles = ['Basic', 'Array', 'String', 'Linked List', 'Stack', "Recusion", "Binary Tree"];
@@ -77,19 +76,6 @@ const DSA_Headers = () => {
     }
   };
 
-  const handlePickRandom = (title) => {
-    const filtered = items.filter((item) => item.title === title);
-    if (filtered.length > 0) {
-      const randomIndex = Math.floor(Math.random() * filtered.length);
-      setRandomQuestion(filtered[randomIndex]);
-    }
-  };
-
-  useEffect(() => {
-    if (randomQuestion) {
-      navigate(`/question/${randomQuestion.$id}`);
-    }
-  }, [randomQuestion, navigate]);
 
   const getCompletedCount = (title) => {
     const filtered = items.filter((item) => item.title === title);
@@ -105,7 +91,6 @@ const DSA_Headers = () => {
           title={title}
           expanded={expanded}
           handleExpand={handleExpand}
-          handlePickRandom={handlePickRandom}
           searchTerm={searchTerms[title] || ''}
           handleSearchChange={handleSearchChange}
           getCompletedCount={getCompletedCount}
