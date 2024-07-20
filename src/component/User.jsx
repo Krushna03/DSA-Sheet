@@ -1,23 +1,24 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import authService from '../Appwrite/Authenticatioon';
+
 
 const User = () => {
   const navigate = useNavigate();
-  const user = useSelector(state => state.auth.user); // Adjust this according to your auth state structure
+  const [userdata, setUserData] = useState('')
 
-  const handleUserClick = () => {
-    navigate('/user-details'); // Navigate to the user details page
-  };
+  useEffect(() => {
+    authService.getCurrentUser().then((user) => setUserData(user))
+ })
 
   return (
-    <div className="flex items-center space-x-3 cursor-pointer" onClick={handleUserClick}>
+    <div className="flex items-center space-x-3 cursor-pointer">
       <img 
-        src={user?.avatar || 'default-avatar.png'} // Display the user's avatar or a default one
+        src={userdata?.avatar || 'default-avatar.png'}
         alt="User Avatar"
         className="w-10 h-10 rounded-full border"
       />
-      <span className="hidden md:block text-lg">{user?.name || 'User'}</span>
+      <span className="hidden md:block text-lg">{userdata?.name || 'User'}</span>
     </div>
   );
 };
