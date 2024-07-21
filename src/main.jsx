@@ -35,12 +35,12 @@ const router = createBrowserRouter([
         { path: "/edit-question/:serialNo", element: <AuthLayout authentication> <EditQuestion /> </AuthLayout> }, 
         { path: "/profile/:userId", element: <AuthLayout authentication> <User /> </AuthLayout> }, 
 
-        { path: "/array", element: <Array /> }, 
-        { path: "/string", element: <String /> }, 
-        { path: "/linked list", element: <LinkedList /> }, 
-        { path: "/stack", element: <Stack /> }, 
-        { path: "/recursion", element: <Recursion /> }, 
-        { path: "/binary tree", element: <BinaryTree /> }, 
+        { path: "/FreeSheet/array", element: <Array /> }, 
+        { path: "/FreeSheet/string", element: <String /> }, 
+        { path: "/FreeSheet/linked list", element: <LinkedList /> }, 
+        { path: "/FreeSheet/stack", element: <Stack /> }, 
+        { path: "/FreeSheet/recursion", element: <Recursion /> }, 
+        { path: "/FreeSheet/binary tree", element: <BinaryTree /> }, 
       ]
     }
 ])
