@@ -1,11 +1,11 @@
 import React from 'react'
 
-function MySheet() {
+function String() {
   return (
     <>
-    MY sheet 
+    String
     </>
   )
 }
 
-export default MySheet
+export default String

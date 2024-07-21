@@ -14,6 +14,13 @@ import AddQuestion from './page/AddQuestion.jsx'
 import Question from './page/Question.jsx'
 import EditQuestion from './page/EditQuestion.jsx'
 import User from './component/User.jsx'
+import Array from './component/Free-Sheet/DSAComponent/Array.jsx'
+import Stack from './component/Free-Sheet/DSAComponent/Stack.jsx'
+import BinaryTree from './component/Free-Sheet/DSAComponent/BinaryTree.jsx'
+import String from './component/Free-Sheet/DSAComponent/String.jsx'
+import Recursion from './component/Free-Sheet/DSAComponent/Recursion.jsx'
+import LinkedList from './component/Free-Sheet/DSAComponent/LinkedList.jsx'
+
 
 const router = createBrowserRouter([
     {
@@ -27,6 +34,13 @@ const router = createBrowserRouter([
         { path: "/question/:serialNo" , element:<Question /> },
         { path: "/edit-question/:serialNo", element: <AuthLayout authentication> <EditQuestion /> </AuthLayout> }, 
         { path: "/profile/:userId", element: <AuthLayout authentication> <User /> </AuthLayout> }, 
+
+        { path: "/array", element: <Array /> }, 
+        { path: "/string", element: <String /> }, 
+        { path: "/linked list", element: <LinkedList /> }, 
+        { path: "/stack", element: <Stack /> }, 
+        { path: "/recursion", element: <Recursion /> }, 
+        { path: "/binary tree", element: <BinaryTree /> }, 
       ]
     }
 ])
