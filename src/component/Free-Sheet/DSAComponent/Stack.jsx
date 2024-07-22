@@ -19,7 +19,7 @@ function Stack() {
 
   return (
     <>
-       <QuestionLayout questions={questions} gfgIcon={gfgIcon} cnIcon={cnIcon}/>
+       <QuestionLayout title={'Stack'}  questions={questions} gfgIcon={gfgIcon} cnIcon={cnIcon}/>
     </>
   )
 }

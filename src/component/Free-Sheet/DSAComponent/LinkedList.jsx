@@ -20,7 +20,7 @@ function LinkedList() {
 
   return (
     <>
-       <QuestionLayout questions={questions} gfgIcon={gfgIcon} cnIcon={cnIcon}/>
+       <QuestionLayout title={'Linked List'}  questions={questions} gfgIcon={gfgIcon} cnIcon={cnIcon}/>
     </>
   )
 }

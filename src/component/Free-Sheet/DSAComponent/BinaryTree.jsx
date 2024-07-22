@@ -20,7 +20,7 @@ function BinaryTree() {
 
   return (
     <>
-       <QuestionLayout questions={questions} gfgIcon={gfgIcon} cnIcon={cnIcon}/>
+       <QuestionLayout title={'Binary Tree'} questions={questions} gfgIcon={gfgIcon} cnIcon={cnIcon}/>
     </>
   )
 }

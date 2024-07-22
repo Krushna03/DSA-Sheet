@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useMemo , useEffect, useState } from 'react'
 import homeImg from '../assets/home.png'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -14,19 +14,25 @@ function Home() {
 
 
     useEffect(() => {
-     authService.getCurrentUser()
-     .then((res) => {
-       if (res) {
-        setUsername(res.name)
-       }
-     })
-      setLoading(false)
-    })
+      let isMounted = true; // Track if component is mounted
+  
+      authService.getCurrentUser().then((res) => {
+        if (isMounted && res) {
+          setUsername(res.name);
+          setLoading(false);
+        }
+      });
+  
+      return () => {
+        isMounted = false; // Clean up on unmount
+      };
+    }, []);
+  
+    const memoizedUserName = useMemo(() => userName, [userName]);
+  
 
-    
-    if (loading) {
-      return <Loader />;
-    }
+
+   
 
 if( authStatus === false ) {
    return (
@@ -66,7 +72,7 @@ if( authStatus === false ) {
   return !loading ? (
       <div>
           <h1 className='flex justify-center font-medium m-7 text-xl lg:text-3xl'>
-            {userName}'s DSA Sheet
+            {memoizedUserName }'s DSA Sheet
           </h1>
       
           <DSA_Headers />

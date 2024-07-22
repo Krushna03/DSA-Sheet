@@ -19,7 +19,7 @@ function Recursion() {
 
   return (
     <>
-       <QuestionLayout questions={questions} gfgIcon={gfgIcon} cnIcon={cnIcon}/>
+       <QuestionLayout title={'Recursion'}  questions={questions} gfgIcon={gfgIcon} cnIcon={cnIcon}/>
     </>
   )
 }

@@ -19,7 +19,7 @@ function String() {
 
   return (
     <>
-       <QuestionLayout questions={questions} gfgIcon={gfgIcon} cnIcon={cnIcon}/>
+       <QuestionLayout title={'String'}  questions={questions} gfgIcon={gfgIcon} cnIcon={cnIcon}/>
     </>
   )
 }

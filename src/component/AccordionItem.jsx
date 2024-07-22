@@ -34,7 +34,7 @@ const AccordionItem = ({
 
    
       <AccordionDetails>
-      {filteredItems ? (
+      {filteredItems.length > 0 ? (
          <div className='w-full flex flex-col'>
          <div className='w-full flex justify-center gap-2 mb-2 lg:gap-2'>
            <div className='w-4/6 lg:w-5/6 md:w-4/6'>
@@ -87,7 +87,7 @@ const AccordionItem = ({
          </List>
        </div>
      ) : (
-       <div className='flex flex-col items-center justify-center w-full h-[200px] text-center'>
+       <div className='flex items-center justify-center w-full h-[50px] text-center'>
          <Typography>No Question found</Typography>
        </div>
      )}
