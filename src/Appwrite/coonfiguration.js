@@ -164,8 +164,52 @@ export class Service{
             return { documents: [] }; 
         }
     }
+
+
+    // ARRAY COLLECTION 
+    async arrayQuestions(userId) {
+      if(!userId) {
+        console.log('getQuestions error: userId or title is not defined at configue');
+        return { documents: [] };
+    }
+    try {
+        const response = await this.databases.listDocuments(
+            conf.appwriteDataBaseID,
+            conf.appwriteArrayCollectionID,    
+            [
+                Query.equal('userId', userId),
+            ] 
+        )
+        console.log('API Response at ArrayQuestion:', response);
+        return response;
+    } catch (error) {
+        console.log("Appwrite serive :: getQuestions :: error", error);
+        return { documents: [] };
+    }
+    }
+
+    async updateArrayQuestionStatus (questionId, completed) {
+      if(!questionId || !completed) {
+          console.log('error at questionId & completed at updateQuestionStatus');
+      }
+      try {
+        const response = await this.databases.updateDocument(
+          conf.appwriteDataBaseID, 
+          conf.appwriteArrayCollectionID, 
+          questionId, 
+          {
+            completed: completed
+          });
+        return response;
+      } catch (error) {
+        console.error('Error updating question status:', error);
+        throw error;
+      }
+    }
+
 }
 
 
 const service = new Service()
+
 export default service
