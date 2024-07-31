@@ -1,11 +1,15 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { TextField, InputAdornment } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
+import { QuestionProvider } from '../../../context';
 
 
-function QuestionLayout({toggleComplete, getCompletedCount, pickRandom, title, questions, cnIcon, gfgIcon}) {
+function QuestionLayout({ getCompletedCount, questions, toggleComplete, pickRandom, title, cnIcon, gfgIcon}) {
   
- 
+  useEffect(() => {
+    localStorage.setItem('questions', JSON.stringify(questions));
+  }, [questions]);
+
   return (
     <>
         <div className='flex flex-col justify-center mt-5'>
@@ -57,7 +61,12 @@ function QuestionLayout({toggleComplete, getCompletedCount, pickRandom, title, q
               
               <div className='w-1/6 py-2 border-r border-l border-gray-400 flex'>
                 <div className='w-1/2 flex justify-center items-center border-r border-gray-400'>
-                  <input type="checkbox" className='w-5 h-4' onClick={toggleComplete(question.id)}/>
+                   <input 
+                      type="checkbox" 
+                      className='w-5 h-4' 
+                      checked={question.completed}
+                      onChange={() => toggleComplete(question.id)}
+                    />
                 </div>
                 <div className='w-1/2 flex justify-center items-center'>
                   <h1 className='text-lg'>{question.id}</h1>
