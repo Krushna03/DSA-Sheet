@@ -1,16 +1,15 @@
 import React from 'react';
+import classNames from 'classnames';
 
-const LoaderButton = () => {
-  const loaderStyle = {
-    width: '22px',
-    height: '22px',
-    borderRadius: '50%',
-    display: 'inline-block',
-    borderTop: '3px solid #FFF',
-    borderRight: '3px solid transparent',
-    boxSizing: 'border-box',
-    animation: 'rotation 1s linear infinite',
-  };
+const LoaderButton = ({ color = 'white' }) => {
+  const loaderClasses = classNames(
+    'w-[22px] h-[22px] rounded-full inline-block box-border',
+    {
+      'border-t-[3px] border-r-[3px]': true,
+      'border-t-white': color === 'white',
+      'border-t-black': color === 'black',
+    }
+  );
 
   const rotationKeyframes = `
     @keyframes rotation {
@@ -22,7 +21,7 @@ const LoaderButton = () => {
   return (
     <div>
       <style>{rotationKeyframes}</style>
-      <span style={loaderStyle}></span>
+      <span className={loaderClasses} style={{ borderTopColor: color, borderRightColor: 'transparent', animation: 'rotation 1s linear infinite' }}></span>
     </div>
   );
 };

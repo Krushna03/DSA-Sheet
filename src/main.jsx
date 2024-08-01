@@ -14,12 +14,12 @@ import AddQuestion from './page/AddQuestion.jsx'
 import Question from './page/Question.jsx'
 import EditQuestion from './page/EditQuestion.jsx'
 import User from './component/User.jsx'
-import Array from './component/Free-Sheet/DSAComponent/Array.jsx'
-import Stack from './component/Free-Sheet/DSAComponent/Stack.jsx'
-import BinaryTree from './component/Free-Sheet/DSAComponent/BinaryTree.jsx'
-import String from './component/Free-Sheet/DSAComponent/String.jsx'
-import Recursion from './component/Free-Sheet/DSAComponent/Recursion.jsx'
-import LinkedList from './component/Free-Sheet/DSAComponent/LinkedList.jsx'
+import Array from './component/Free-Sheet/Array.jsx'
+import Stack from './component/Free-Sheet/Stack.jsx'
+import BinaryTree from './component/Free-Sheet/BinaryTree.jsx'
+import String from './component/Free-Sheet/String.jsx'
+import Recursion from './component/Free-Sheet/Recursion.jsx'
+import LinkedList from './component/Free-Sheet/LinkedList.jsx'
 
 
 const router = createBrowserRouter([

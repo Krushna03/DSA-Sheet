@@ -179,8 +179,7 @@ export class Service{
             [
                 Query.equal('userId', userId),
             ] 
-        )
-        console.log('API Response at ArrayQuestion:', response);
+        )     
         return response;
     } catch (error) {
         console.log("Appwrite serive :: getQuestions :: error", error);
@@ -189,7 +188,7 @@ export class Service{
     }
 
     async updateArrayQuestionStatus (questionId, completed) {
-      if(!questionId || !completed) {
+      if(!questionId) {
           console.log('error at questionId & completed at updateQuestionStatus');
       }
       try {
@@ -206,6 +205,21 @@ export class Service{
         throw error;
       }
     }
+
+    async ArraysearchQuestions(question) {
+      try {
+        return await this.databases.listDocuments(
+          conf.appwriteDataBaseID, 
+          conf.appwriteCollectionID,
+          [ 
+            Query.search('Question', question),
+          ]
+        )
+      } catch (error) {
+          console.error('Error searching posts:', error);
+          return { documents: [] }; 
+      }
+  }
 
 }
 
