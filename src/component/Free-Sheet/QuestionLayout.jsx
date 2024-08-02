@@ -70,7 +70,7 @@ function QuestionLayout({ getCompletedCount, questions, handleCheckboxChange, pi
                 </div>
 
                 {questions.map((question, index) => (
-                  <div key={index} className='flex justify-between border-b border-gray-400 mx-2'>
+                  <div key={index} className='flex justify-between border-b border-gray-400 mx-2 lg:mx-0'>
                     
                     <div className='w-2/6 lg:w-1/6 py-2 border-r border-l border-gray-400 flex'>
                         <div className='w-1/2 flex justify-center items-center border-r border-gray-400'>
