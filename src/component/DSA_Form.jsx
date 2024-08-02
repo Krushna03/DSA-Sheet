@@ -5,12 +5,12 @@ import service from '../Appwrite/coonfiguration';
 import authService from '../Appwrite/Authenticatioon';
 
 const DSA_Headers = () => {
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState({});
   const [items, setItems] = useState([]);
   const [searchTerms, setSearchTerms] = useState({});
   const [searchResults, setSearchResults] = useState({});
   const navigate = useNavigate();
-  const titles = ['Basic', 'Array', 'String', 'Linked List', 'Stack', "Recusion", "Binary Tree"];
+  const titles = ['Basic', 'Array', 'String', 'Linked List', 'Stack', 'Recursion', 'Binary Tree'];
 
   useEffect(() => {
     const fetchUserAndQuestions = async () => {
@@ -36,7 +36,8 @@ const DSA_Headers = () => {
   const handleCheckboxChange = async (event, questionId, completed) => {
     event.stopPropagation();
     setItems((prevItems) =>
-      prevItems.map((item) => item.$id === questionId ? { ...item, completed } : item
+      prevItems.map((item) =>
+        item.$id === questionId ? { ...item, completed } : item
       )
     );
     try {
@@ -44,7 +45,8 @@ const DSA_Headers = () => {
     } catch (error) {
       console.error('Error updating question status:', error);
       setItems((prevItems) =>
-        prevItems.map((item) => item.$id === questionId ? { ...item, completed: !completed } : item
+        prevItems.map((item) =>
+          item.$id === questionId ? { ...item, completed: !completed } : item
         )
       );
     }
@@ -72,10 +74,14 @@ const DSA_Headers = () => {
           ...prevResults,
           [title]: result.documents.filter((item) => item.title === title),
         }));
+      } else {
+        setSearchResults((prevResults) => ({
+          ...prevResults,
+          [title]: [], // Set to an empty array if no results are found
+        }));
       }
     }
   };
-
 
   const getCompletedCount = (title) => {
     const filtered = items.filter((item) => item.title === title);

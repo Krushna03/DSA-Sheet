@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Avatar, Menu, MenuItem } from '@mui/material';
 import authService from '../../Appwrite/Authenticatioon';
+import LogoutBtn from './LogoutBtn';
 
 function UserBtn() {
   const [userId, setUserId] = useState('')
@@ -42,7 +43,7 @@ function UserBtn() {
           onClose={handleMenuClose}
         >
           <MenuItem onClick={handleProfileClick}>Profile</MenuItem>
-          <MenuItem onClick={() => navigate('/logout')}>Logout</MenuItem>
+          <MenuItem> <LogoutBtn/> </MenuItem>
         </Menu>
     </>
   )

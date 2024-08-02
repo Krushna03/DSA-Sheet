@@ -8,10 +8,10 @@ function FreeSheet() {
    <div>
 
    <div className='flex justify-center mt-5 '>
-      <p className='text-4xl m-6 font-semibold'>List of Data Structres</p>
+      <p className='font-bold mt-5 text-3xl lg:text-4xl'>List of Data Structres</p>
    </div> 
 
-     <div className='flex justify-center m-3 w-full flex-wrap h-18 gap-9 mb-10'>
+     <div className='flex justify-center m-3 w-full flex-wrap gap-9'>
            <Card title={'Array'}/>
            <Card title={'String'}/>
            <Card title={'Linked List'}/>
