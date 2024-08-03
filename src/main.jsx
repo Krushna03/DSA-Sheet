@@ -13,7 +13,6 @@ import FreeSheet from './page/FreeSheet.jsx'
 import AddQuestion from './page/AddQuestion.jsx'
 import Question from './page/Question.jsx'
 import EditQuestion from './page/EditQuestion.jsx'
-import User from './component/User.jsx'
 import Array from './component/Free-Sheet/Array.jsx'
 import Stack from './component/Free-Sheet/Stack.jsx'
 import BinaryTree from './component/Free-Sheet/BinaryTree.jsx'
@@ -33,7 +32,6 @@ const router = createBrowserRouter([
         { path: '/AddQuestion', element:<AuthLayout authentication>{" "} <AddQuestion /> </AuthLayout> },
         { path: "/question/:serialNo" , element:<Question /> },
         { path: "/edit-question/:serialNo", element: <AuthLayout authentication> <EditQuestion /> </AuthLayout> }, 
-        { path: "/profile/:userId", element: <AuthLayout authentication> <User /> </AuthLayout> }, 
 
         { path: "/FreeSheet/array", element: <Array /> }, 
         { path: "/FreeSheet/string", element: <String /> }, 

@@ -5,12 +5,16 @@ import { useForm, Controller } from 'react-hook-form';
 import service from '../Appwrite/coonfiguration';
 import authService from '../Appwrite/Authenticatioon';
 import MonacoEditor from '../component/MonacoCodeEditor';
+import LoaderButton from '../component/Loading/LoaderBtn';
 import { ID } from 'appwrite';
+
 
 const AddQuestion = ({ question }) => {
   const navigate = useNavigate();
   const [userId, setUserId] = useState('');
   const [selectedTitle, setSelectedTitle] = useState(question?.title || '');
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
 
   const { register, control, handleSubmit, setValue, formState: { errors } } = useForm({
     defaultValues: {
@@ -36,44 +40,71 @@ const AddQuestion = ({ question }) => {
   }, []);
 
   const submit = async (data) => {
+    setLoading(true)
+    setError('')
     try {
       const { serialNo, Question, code, link } = data;
       console.log(data);
   
         if (question) {
           // Update existing question
-          const updatedQuestion = await service.updateQuestion(
-            question.$id, 
-            { serialNo, Question, code, link }
-          );
-          console.log('Updated question:', updatedQuestion);
-          navigate(`/question/${updatedQuestion.$id}`);
+          try {
+            const updatedQuestion = await service.updateQuestion(
+              question.$id, 
+              { serialNo, Question, code, link }
+            );
+            navigate(`/question/${updatedQuestion.$id}`);
+          } catch (error) {
+            setError(error.message)
+          }
         } 
         else if (selectedTitle && serialNo.trim() && Question.trim() && code && link.trim()) {
           // Create new question
-          const createdQuestion = await service.createQuestion({
-            title: selectedTitle,
-            serialNo: serialNo,
-            Question: Question,
-            code: code,
-            link: link,
-            userId: userId,
-          });
-          console.log(createdQuestion);
-          if (createdQuestion) {
-            navigate(`/`);
+          try {
+            const createdQuestion = await service.createQuestion({
+              title: selectedTitle,
+              serialNo: serialNo + ID.unique(),
+              Question: Question,
+              code: code,
+              link: link,
+              userId: userId,
+            });
+            if (createdQuestion) {
+              navigate(`/`);
+            }
+          } catch (error) {
+            setError(error.message)
           }
         }
     } catch (error) {
+      setError(error.message)
       console.error('Error submitting question:', error);
     }
+    finally {
+       setLoading(false)
+    }
   };
+
+  console.log(error, 'erro message');
+
+   const navigation = () => {
+      if (question) {
+        navigate(`/question/${question.$id}`)
+      }
+      else {
+         navigate('/')
+      }
+   }
 
   return (
     <>
       <h1 className='flex justify-center font-normal font-sans mt-5 text-4xl'>
         {question ? 'Edit Question' : 'Add Question'}
       </h1>
+
+      {error && 
+        <p className="text-red-600 mt-8 text-center">{error}</p>
+      }
 
       <form onSubmit={handleSubmit(submit)} className='flex justify-center mb-3'>
         <Box className='m-5 p-2 w-full sm:w-5/6 md:w-4/6 lg:w-5/6'>
@@ -108,6 +139,14 @@ const AddQuestion = ({ question }) => {
             {...register("Question", { required: true })}
           />
 
+          <TextField
+            label="Online code Editor Link"
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            {...register("link", { required: true })}
+          />
+
           <Controller
             name="code"
             control={control}
@@ -117,23 +156,33 @@ const AddQuestion = ({ question }) => {
             )}
           />
 
-          <TextField
-            label="Online code Editor Link"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            {...register("link", { required: true })}
-          />
 
-          <Button variant="contained" color="primary" type='submit'>
-            {question ? 'Update Question' : 'Add Question'}
-          </Button>
+         <div className='flex justify-end gap-3 my-4'>
+            <Button 
+               variant="contained" 
+               type='submit' 
+               style={{
+                backgroundColor: 'black',
+                color: 'white',
+              }}
+              disabled={loading} // Disable button while loading
+            >
+              {loading ? <LoaderButton /> : (question ? 'Update Question' : 'Add Question')}
+            </Button>
+
+            <Button 
+               variant="contained" 
+               onClick={navigation}
+               style={{
+                backgroundColor: 'black',
+                color: 'white',
+              }}
+            >
+                Cancel
+            </Button>
+         </div>
           
         </Box>
-        
-        {errors && errors.title && (
-                    <span className="block text-red-500 mb-2">{errors.title.message}</span>
-        )}
       </form>
     </>
   );

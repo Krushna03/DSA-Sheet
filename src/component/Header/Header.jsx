@@ -4,8 +4,6 @@ import { useNavigate, Link } from 'react-router-dom';
 import Logo from '../Logo';
 import LogoutBtn from './LogoutBtn';
 import { FaBars } from 'react-icons/fa';
-import UserBtn from './UserBtn';
-import UserBtnSmall from './UserBtnSmall';
 
 
 function Header() {
@@ -50,14 +48,14 @@ function Header() {
           </Link>
         </div>
 
-        <div className="flex items-center sm:hidden">
+        <div className="flex sm:hidden">
           {authStatus && (
-            <div className="mr-4">
-              <UserBtnSmall />
+            <div className='mr-1'>
+              <LogoutBtn />
             </div>
           )}
           <button
-            className="text-2xl mr-4 ml-2"
+            className="text-2xl mr-5"
             onClick={() => setMenuOpen(!menuOpen)}
           >
             <FaBars />
@@ -79,11 +77,9 @@ function Header() {
           )}
 
           {authStatus && (
-            <>
-              <li className="inline-block text-lg px-3 py-3 duration-200 rounded-full text-zinc-950">
-                <UserBtn />
+              <li>
+                <LogoutBtn />
               </li>
-            </>
           )}
         </ul>
       </nav>
@@ -107,13 +103,13 @@ function Header() {
               ) : null
             )}
 
-            {authStatus && (
+            {/* {authStatus && (
               <>
                 <li className="flex justify-center px-5 duration-200 hover:bg-gray-200 rounded-full text-lg w-full">
                   <LogoutBtn />
                 </li>
               </>
-            )}
+            )} */}
           </ul>
         </div>
       )}

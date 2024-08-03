@@ -10,6 +10,7 @@ import Loader from "./component/Loading/Loader"
 
 function App() {
   const [loading, setLoading] = useState(true)
+  const [showFooter, setShowFooter] = useState(false)
   const dispatch = useDispatch()
   const location = useLocation()
 
@@ -27,6 +28,20 @@ function App() {
   }, [])
 
 
+   useEffect(() => {
+      if (location.pathname === '/') {
+        const timer = setTimeout(() => {
+           setShowFooter(true)
+        }, 5000)
+        return () => clearTimeout(timer)
+      }
+      else {
+        setShowFooter(false)
+      }
+   }, [location.pathname])
+
+   
+
  return !loading ? (
    <div className="min-h-screen flex flex-wrap content-between bg-white">
        <div className='w-full block'>
@@ -34,11 +49,10 @@ function App() {
             <main>
               <Outlet /> 
             </main>
-          {location.pathname === '/' && <Footer />}
+          { showFooter && <Footer /> }
       </div>
    </div>
  ) :  <Loader />
-   
 }
 
 export default App

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Accordion, AccordionSummary, AccordionDetails, Typography, List, ListItem, Box, IconButton, TextField, InputAdornment } from '@mui/material';
+import { Accordion, AccordionSummary, AccordionDetails, Typography, List, ListItem, Box, IconButton } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import AddIcon from '@mui/icons-material/Add';
 import SearchIcon from '@mui/icons-material/Search';
@@ -33,7 +33,6 @@ const AccordionItem = ({
       </AccordionSummary>
 
       <AccordionDetails>
-        {/* Always render the search box and "done" box */}
         <div className='w-full flex flex-col'>
           <div className='w-full flex justify-center gap-2 mb-2 lg:gap-2'>
             <div className='relative w-4/6 lg:w-5/6 md:w-4/6'>
@@ -70,6 +69,14 @@ const AccordionItem = ({
                           width: '1rem',
                           height: '1rem',
                           borderRadius: '0.25rem',
+                          display: 'inline-block',
+                          position: 'relative',
+                          cursor: 'pointer',
+                          backgroundImage: item.completed
+                            ? 'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'white\' width=\'16px\' height=\'16px\'%3E%3Cpath d=\'M0 0h24v24H0z\' fill=\'none\'/%3E%3Cpath d=\'M9 16.2l-4.2-4.2L3 13.8 9 19.8l12-12-1.4-1.4z\'/%3E%3C/svg%3E")'
+                            : 'none',
+                          backgroundRepeat: 'no-repeat',
+                          backgroundPosition: 'center',
                         }}
                       />
                       <Link to={`/question/${item.$id}`} className='flex gap-3 lg:gap-4 items-center'>

@@ -5,7 +5,7 @@ import AuthLayout from "./AuthLayout";
 import Button from "./Button";
 import Input from "./security/Input";
 import Login from "./security/Login";
-
+import MonacoEditor from './MonacoCodeEditor'
 
 
 export {
@@ -16,5 +16,5 @@ export {
    Button,
    Input,
    Login,
- 
+   MonacoEditor,
 }

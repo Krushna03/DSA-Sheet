@@ -3,7 +3,6 @@ import service from '../Appwrite/coonfiguration';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism'; // You can choose different styles
-import { Button } from '@mui/material';
 import { FaTrash, FaEdit  } from "react-icons/fa";
 
 
@@ -75,37 +74,49 @@ function Question() {
   
     return (
       <div className="container mx-auto p-4 max-w-4xl">
-      <div className="bg-gray-50 shadow-lg rounded-lg p-6">
+      <div className="bg-gray-50 shadow-lg rounded-lg py-4 px-2">
         
-        <div className="flex justify-between items-center mb-4">
+        <div className="flex flex-wrap justify-between items-center mb-3 mx-2 lg:mb-5">
           
-          <h1 className="text-3xl font-bold text-gray-800">{question.Question}</h1>
+          <h1 className="text-xl lg:text-3xl font-bold text-gray-800">{question.Question}</h1>
           
-          <div className="flex items-end">
-            <input
-              type="checkbox"
-              checked={question.completed || false}
-              onChange={(e) => handleCheckboxChange(e.target.checked)}
-              className="mr-1 mb-1 h-5 w-5 rounded border-gray-300 text-black focus:ring-black forced-colors:to-black, "
-            />
-            <label className="text-lg mt-5 text-gray-700">Completed</label>
+          <div className="flex items-end gap-4 my-2">
+              <input
+                type="checkbox"
+                checked={question.completed || false}
+                onChange={(e) => handleCheckboxChange(e.target.checked)}
+                className="h-5 w-5"
+                  style={{
+                    appearance: 'none',
+                    backgroundColor: question.completed ? 'black' : 'white',
+                    border: '2px solid black',
+                    borderRadius: '0.25rem',
+                    display: 'inline-block',
+                    position: 'relative',
+                    cursor: 'pointer',
+                    backgroundImage: question.completed
+                      ? 'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'white\' width=\'16px\' height=\'16px\'%3E%3Cpath d=\'M0 0h24v24H0z\' fill=\'none\'/%3E%3Cpath d=\'M9 16.2l-4.2-4.2L3 13.8 9 19.8l12-12-1.4-1.4z\'/%3E%3C/svg%3E")'
+                      : 'none',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: 'center',
+                  }}
+              />
+              {/* <label className="text-lg mt-2 text-gray-700">Completed</label> */}
            
-            <Button 
-              onClick={() => navigate(`/edit-question/${serialNo}`)} >
-              <FaEdit size={20} color='black'/>
-            </Button>
+            <button onClick={() => navigate(`/edit-question/${serialNo}`)}>
+              <FaEdit size={19} color='black'/>
+            </button>
 
-           <Button onClick={deleteQues}>
-              <FaTrash size={20} color='black'/>
-           </Button>
+           <button onClick={deleteQues}>
+              <FaTrash size={19} color='black'/>
+           </button>
            
           </div>
-
         </div>
 
-        <div className="mb-4">
-          <div className="prose prose-lg max-w-none text-gray-700">
-              <SyntaxHighlighter language="java" style={atomDark}>
+        <div className="mb-5">
+          <div className="prose prose-lg max-w-none">
+              <SyntaxHighlighter language="java" style={atomDark} className='text-sm lg:text-lg'>
                 {question.code}
               </SyntaxHighlighter>
           </div>

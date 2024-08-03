@@ -7,8 +7,8 @@ function Loader() {
       <style>
         {`
           .loader {
-            width: 89px;
-            height: 89px;
+            width: 72px; /* Smaller size for small devices */
+            height: 72px;
             border-radius: 50%;
             display: inline-block;
             position: relative;
@@ -28,8 +28,8 @@ function Loader() {
             margin: auto;
             border: 3px solid;
             border-color: transparent #131110 #221d1c;
-            width: 80px;
-            height: 80px;
+            width: 65px;
+            height: 65px;
             border-radius: 50%;
             animation: rotationBack 0.5s linear infinite;
             transform-origin: center center;
@@ -48,6 +48,16 @@ function Loader() {
             }
             100% {
               transform: rotate(-360deg);
+            }
+          }
+          @media (min-width: 768px) {
+            .loader {
+              width: 89px; /* Larger size for larger devices */
+              height: 89px;
+            }
+            .loader::after {
+              width: 80px;
+              height: 80px;
             }
           }
         `}
