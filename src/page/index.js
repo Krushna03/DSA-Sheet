@@ -1,13 +1,13 @@
 import Home from "./Home";
 import FreeSheet from "./FreeSheet";
-import MySheet from './MySheet';
 import Question from "./Question";
-
-
+import AddQuestion from './AddQuestion'
+import EditQuestion from './EditQuestion'
 
 export {
    Home,
    Question,
-   MySheet,
-   FreeSheet
+   FreeSheet,
+   AddQuestion,
+   EditQuestion
 }

@@ -24,15 +24,16 @@ import LinkedList from './component/Free-Sheet/LinkedList.jsx'
 const router = createBrowserRouter([
     {
       path: '/', element: <App />,
+
       children: [
         { path: '/', element: <Home /> },
         { path: '/login', element: <AuthLayout authentication={false}> <Login /> </AuthLayout> },
         { path: '/signup', element: <AuthLayout authentication={false}> <Signup /> </AuthLayout> },
-        { path: '/FreeSheet',element: <AuthLayout authentication>{" "} <FreeSheet /> </AuthLayout> },
         { path: '/AddQuestion', element:<AuthLayout authentication>{" "} <AddQuestion /> </AuthLayout> },
         { path: "/question/:serialNo" , element:<Question /> },
         { path: "/edit-question/:serialNo", element: <AuthLayout authentication> <EditQuestion /> </AuthLayout> }, 
-
+        
+        { path: '/FreeSheet',element: <AuthLayout authentication>{" "} <FreeSheet /> </AuthLayout> },
         { path: "/FreeSheet/array", element: <Array /> }, 
         { path: "/FreeSheet/string", element: <String /> }, 
         { path: "/FreeSheet/linked list", element: <LinkedList /> }, 

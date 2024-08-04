@@ -1,8 +1,6 @@
 import React from 'react';
-import { TextField, InputAdornment } from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
-import LoaderButton from '../Loading/LoaderBtn';
 import { FaSearch } from 'react-icons/fa';
+import LoaderFreeSheet from '../Loading/LoaderFreeSheet.jsx';
 
 
 function QuestionLayout({ getCompletedCount, questions, handleCheckboxChange, pickRandom, title, searchTerm, handleSearchChange, loading }) {
@@ -46,8 +44,8 @@ function QuestionLayout({ getCompletedCount, questions, handleCheckboxChange, pi
         <div className='w-[93%] lg:w-[60%]'>
 
           {loading ? (
-            <div className='text-center'>
-             <LoaderButton color='black'/>
+            <div className='text-center mt-5'>
+             <LoaderFreeSheet/>
             </div>
           ) : (
             <>

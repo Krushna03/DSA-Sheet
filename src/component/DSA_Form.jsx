@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import AccordionItem from './AccordionItem';
+import AccordionItem from './DSA_Item';
 import service from '../Appwrite/coonfiguration';
 import authService from '../Appwrite/Authenticatioon';
 

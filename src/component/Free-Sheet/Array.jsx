@@ -3,6 +3,7 @@ import QuestionLayout from './QuestionLayout';
 import authService from '../../Appwrite/Authenticatioon';
 import service from '../../Appwrite/coonfiguration';
 
+
 function Array() {
   const [questions, setQuestions] = useState([]);
   const [filteredQuestions, setFilteredQuestions] = useState([]);
@@ -83,7 +84,7 @@ function Array() {
       handleCheckboxChange={handleCheckboxChange}
       pickRandom={pickRandom} 
       title={'Array'} 
-      questions={filteredQuestions} // Pass filteredQuestions here
+      questions={filteredQuestions}
       searchTerm={searchTerm}
       handleSearchChange={handleSearchChange} 
       loading={loading}

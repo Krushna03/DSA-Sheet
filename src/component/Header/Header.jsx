@@ -102,14 +102,6 @@ function Header() {
                 </li>
               ) : null
             )}
-
-            {/* {authStatus && (
-              <>
-                <li className="flex justify-center px-5 duration-200 hover:bg-gray-200 rounded-full text-lg w-full">
-                  <LogoutBtn />
-                </li>
-              </>
-            )} */}
           </ul>
         </div>
       )}
