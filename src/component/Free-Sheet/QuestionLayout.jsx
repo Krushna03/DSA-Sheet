@@ -5,7 +5,8 @@ import LoaderFreeSheet from '../Loading/LoaderFreeSheet.jsx';
 
 function QuestionLayout({ getCompletedCount, questions, handleCheckboxChange, pickRandom, title, searchTerm, handleSearchChange, loading }) {
 
-  const gfgIcon = 'https://upload.wikimedia.org/wikipedia/commons/4/43/GeeksforGeeks.svg';
+  // const gfgIcon = 'https://upload.wikimedia.org/wikipedia/commons/4/43/GeeksforGeeks.svg';
+  const leetcodeIcon = 'https://upload.wikimedia.org/wikipedia/commons/1/19/LeetCode_logo_black.png';
   const cnIcon = "https://i.ibb.co/RcQ5qLs/Coding-Ninjas-logo.jpg";
 
   return (
@@ -40,7 +41,7 @@ function QuestionLayout({ getCompletedCount, questions, handleCheckboxChange, pi
         </div>
       </div>
 
-      <div className='flex justify-center mb-2 lg:gap-2 mt-4 lg:mt-5'>
+      <div className='flex justify-center lg:gap-2 mt-4 lg:mt-5 mb-12'>
         <div className='w-[93%] lg:w-[60%]'>
 
           {loading ? (
@@ -111,7 +112,7 @@ function QuestionLayout({ getCompletedCount, questions, handleCheckboxChange, pi
                       <div className='w-1/2 flex justify-center items-center border-r border-gray-400'>
                         <h1 className='h-4 w-7'>
                           <a href={question.gfg} target="_blank" rel="noopener noreferrer">
-                            <img src={gfgIcon} alt="gfg" />
+                            <img src={leetcodeIcon} alt="gfg" />
                           </a> 
                         </h1>
                       </div>
