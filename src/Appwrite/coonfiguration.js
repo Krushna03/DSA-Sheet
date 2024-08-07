@@ -221,6 +221,289 @@ export class Service{
       }
   }
 
+
+
+   // String COLLECTION 
+   async stringQuestions(userId) {
+    if(!userId) {
+      console.log('getQuestions error: userId or title is not defined at configue');
+      return { documents: [] };
+  }
+  try {
+      const response = await this.databases.listDocuments(
+          conf.appwriteDataBaseID,
+          conf.appwriteStringCollectionID,    
+          [
+              Query.equal('userId', userId),
+          ] 
+      )     
+      return response;
+  } catch (error) {
+      console.log("Appwrite serive :: getQuestions :: error", error);
+      return { documents: [] };
+  }
+  }
+
+  async updateStringQuestionStatus (questionId, completed) {
+    if(!questionId) {
+        console.log('error at questionId & completed at updateQuestionStatus');
+    }
+    try {
+      const response = await this.databases.updateDocument(
+        conf.appwriteDataBaseID, 
+        conf.appwriteStringCollectionID, 
+        questionId, 
+        {
+          completed: completed
+        });
+      return response;
+    } catch (error) {
+      console.error('Error updating question status:', error);
+      throw error;
+    }
+  }
+
+  async StringsearchQuestions(question) {
+    try {
+      return await this.databases.listDocuments(
+        conf.appwriteDataBaseID, 
+        conf.appwriteStringCollectionID,
+        [ 
+          Query.search('Question', question),
+        ]
+      )
+    } catch (error) {
+        console.error('Error searching posts:', error);
+        return { documents: [] }; 
+    }
+}
+
+
+// Linked List
+  async LinkedListQuestion(userId) {
+    if(!userId) {
+      console.log('getQuestions error: userId or title is not defined at configue');
+      return { documents: [] };
+  }
+  try {
+      const response = await this.databases.listDocuments(
+          conf.appwriteDataBaseID,
+          conf.appwriteLinkedListCollectionID,    
+          [
+              Query.equal('userId', userId),
+          ] 
+      )     
+      return response;
+  } catch (error) {
+      console.log("Appwrite serive :: getQuestions :: error", error);
+      return { documents: [] };
+  }
+  }
+
+  async updateLinkedListQuestionStatus (questionId, completed) {
+    if(!questionId) {
+        console.log('error at questionId & completed at updateQuestionStatus');
+    }
+    try {
+      const response = await this.databases.updateDocument(
+        conf.appwriteDataBaseID, 
+        conf.appwriteLinkedListCollectionID, 
+        questionId, 
+        {
+          completed: completed
+        });
+      return response;
+    } catch (error) {
+      console.error('Error updating question status:', error);
+      throw error;
+    }
+  }
+
+  async LinkedListsearchQuestions(question) {
+    try {
+      return await this.databases.listDocuments(
+        conf.appwriteDataBaseID, 
+        conf.appwriteLinkedListCollectionID,
+        [ 
+          Query.search('Question', question),
+        ]
+      )
+    } catch (error) {
+        console.error('Error searching posts:', error);
+        return { documents: [] }; 
+    }
+  }
+
+  
+    // Stack COLLECTION 
+  async StackQuestions(userId) {
+    if(!userId) {
+      console.log('getQuestions error: userId or title is not defined at configue');
+      return { documents: [] };
+  }
+  try {
+      const response = await this.databases.listDocuments(
+          conf.appwriteDataBaseID,
+          conf.appwriteStackCollectionID,    
+          [
+              Query.equal('userId', userId),
+          ] 
+      )     
+      return response;
+  } catch (error) {
+      console.log("Appwrite serive :: getQuestions :: error", error);
+      return { documents: [] };
+  }
+  }
+
+  async updateStackQuestionStatus (questionId, completed) {
+    if(!questionId) {
+        console.log('error at questionId & completed at updateQuestionStatus');
+    }
+    try {
+      const response = await this.databases.updateDocument(
+        conf.appwriteDataBaseID, 
+        conf.appwriteStackCollectionID, 
+        questionId, 
+        {
+          completed: completed
+        });
+      return response;
+    } catch (error) {
+      console.error('Error updating question status:', error);
+      throw error;
+    }
+  }
+
+  async StacksearchQuestions(question) {
+    try {
+      return await this.databases.listDocuments(
+        conf.appwriteDataBaseID, 
+        conf.appwriteStackCollectionID,
+        [ 
+          Query.search('Question', question),
+        ]
+      )
+    } catch (error) {
+        console.error('Error searching posts:', error);
+        return { documents: [] }; 
+    }
+  }
+
+
+   // Recusion COLLECTION 
+   async RecursionQuestions(userId) {
+    if(!userId) {
+      console.log('getQuestions error: userId or title is not defined at configue');
+      return { documents: [] };
+  }
+  try {
+      const response = await this.databases.listDocuments(
+          conf.appwriteDataBaseID,
+          conf.appwriteRecursionCollectionID,    
+          [
+              Query.equal('userId', userId),
+          ] 
+      )     
+      return response;
+  } catch (error) {
+      console.log("Appwrite serive :: getQuestions :: error", error);
+      return { documents: [] };
+  }
+  }
+
+  async updateRecursionQuestionStatus (questionId, completed) {
+    if(!questionId) {
+        console.log('error at questionId & completed at updateQuestionStatus');
+    }
+    try {
+      const response = await this.databases.updateDocument(
+        conf.appwriteDataBaseID, 
+        conf.appwriteRecursionCollectionID, 
+        questionId, 
+        {
+          completed: completed
+        });
+      return response;
+    } catch (error) {
+      console.error('Error updating question status:', error);
+      throw error;
+    }
+  }
+
+  async RecursionsearchQuestions(question) {
+    try {
+      return await this.databases.listDocuments(
+        conf.appwriteDataBaseID, 
+        conf.appwriteRecursionCollectionID,
+        [ 
+          Query.search('Question', question),
+        ]
+      )
+    } catch (error) {
+        console.error('Error searching posts:', error);
+        return { documents: [] }; 
+    }
+  }
+
+
+
+   // Recusion COLLECTION 
+   async BinaryTreeQuestions(userId) {
+    if(!userId) {
+      console.log('getQuestions error: userId or title is not defined at configue');
+      return { documents: [] };
+  }
+  try {
+      const response = await this.databases.listDocuments(
+          conf.appwriteDataBaseID,
+          conf.appwriteBinaryTreeCollectionID,    
+          [
+              Query.equal('userId', userId),
+          ] 
+      )     
+      return response;
+  } catch (error) {
+      console.log("Appwrite serive :: getQuestions :: error", error);
+      return { documents: [] };
+  }
+  }
+
+  async updateBinaryTreeQuestionStatus (questionId, completed) {
+    if(!questionId) {
+        console.log('error at questionId & completed at updateQuestionStatus');
+    }
+    try {
+      const response = await this.databases.updateDocument(
+        conf.appwriteDataBaseID, 
+        conf.appwriteBinaryTreeCollectionID, 
+        questionId, 
+        {
+          completed: completed
+        });
+      return response;
+    } catch (error) {
+      console.error('Error updating question status:', error);
+      throw error;
+    }
+  }
+
+  async BinaryTreesearchQuestions(question) {
+    try {
+      return await this.databases.listDocuments(
+        conf.appwriteDataBaseID, 
+        conf.appwriteBinaryTreeCollectionID,
+        [ 
+          Query.search('Question', question),
+        ]
+      )
+    } catch (error) {
+        console.error('Error searching posts:', error);
+        return { documents: [] }; 
+    }
+  }
+
+
 }
 
 

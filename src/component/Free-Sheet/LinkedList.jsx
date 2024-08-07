@@ -1,28 +1,96 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import QuestionLayout from './QuestionLayout';
+import authService from '../../Appwrite/Authenticatioon';
+import service from '../../Appwrite/coonfiguration';
 
 
 function LinkedList() {
 
-  const questions = [
-    { id: 0, title: 'Reverse the array', links: ['https://geeksforgeeks.org'] },
-    { id: 1, title: 'Find the maximum and minimum element in an array', links: ['https://geeksforgeeks.org'] },
-    { id: 2, title: 'Find the "Kth" max and min element of an array', links: ['https://geeksforgeeks.org'] },
-    { id: 3, title: 'Given an array which consists of only 0, 1 and 2. Sort the array without using any sorting algo', links: ['https://geeksforgeeks.org'] },
-    { id: 4, title: 'Move all the negative elements to one side of the array', links: ['https://geeksforgeeks.org'] },
-    { id: 5, title: 'Find the Union and Intersection of the two sorted arrays.', links: ['https://geeksforgeeks.org'] },
-  ];
+  const [questions, setQuestions] = useState([]);
+  const [filteredQuestions, setFilteredQuestions] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [loading, setLoading] = useState(true)
 
 
-  const gfgIcon = 'https://upload.wikimedia.org/wikipedia/commons/4/43/GeeksforGeeks.svg';
-  const cnIcon = "https://i.ibb.co/RcQ5qLs/Coding-Ninjas-logo.jpg"
+  useEffect(() => {
+    const fetchUserLinkedListQuestions = async () => {
+      try {
+        const user = await authService.getCurrentUser();
+        if (user) {
+          const result = await service.LinkedListQuestion(user.$id);
+          if (result && result.documents) {
+            setQuestions(result.documents);
+            setFilteredQuestions(result.documents); // Initialize filteredQuestions with all questions
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching user or questions LinkedList:', error);
+      }
+      finally {
+        setLoading(false)
+      }
+    };
+    fetchUserLinkedListQuestions();
+  }, []);
 
+  const handleSearchChange = (e) => {
+    const searchTerm = e.target.value.toLowerCase();
+    setSearchTerm(searchTerm);
+    const filtered = questions.filter((question) =>
+      question.question.toLowerCase().includes(searchTerm)
+    );
+    setFilteredQuestions(filtered);
+  };
+  
+  const handleCheckboxChange = async (event, questionId, completed) => {
+    event.stopPropagation();
+    console.log('clicked seQues');
+    setFilteredQuestions((prevQues) =>
+      prevQues.map((ques) => ques.$id === questionId ? { ...ques, completed } : ques
+      )
+    );
+    try {
+      await service.updateLinkedListQuestionStatus(questionId, completed);
+      console.log('clicked to service');
+    } catch (error) {
+      console.error('Error updating question status at LinkedList:', error);
+      
+      setFilteredQuestions((prevQues) =>
+        prevQues.map((ques) => ques.$id === questionId ? { ...ques, completed: !completed } : ques
+        )
+      );
+      console.log('clicked seQues issues vala');
+    }
+  };
+  
+  const pickRandom = () => {
+    const randomIndex = Math.ceil(Math.random() * questions.length);
+    const matchedQuestion  = questions.find(question => question.serialNo === randomIndex);
+
+    if (matchedQuestion) {
+      window.open(matchedQuestion.titleDetails, '_blank');
+    } else {
+      console.log('No question found with the generated random ID');
+    }
+  }
+
+  const getCompletedCount = () => {
+    const complete = filteredQuestions.filter((question) => question.completed).length;
+    return `${complete}/${questions.length} Done`;
+  };
 
   return (
-    <>
-       <QuestionLayout title={'Linked List'}  questions={questions} gfgIcon={gfgIcon} cnIcon={cnIcon}/>
-    </>
-  )
+    <QuestionLayout 
+      getCompletedCount={getCompletedCount()} 
+      handleCheckboxChange={handleCheckboxChange}
+      pickRandom={pickRandom} 
+      title={'Linked List'} 
+      questions={filteredQuestions}
+      searchTerm={searchTerm}
+      handleSearchChange={handleSearchChange} 
+      loading={loading}
+    />
+  );
 }
 
 export default LinkedList

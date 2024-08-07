@@ -1,25 +1,95 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import QuestionLayout from './QuestionLayout';
+import authService from '../../Appwrite/Authenticatioon';
+import service from '../../Appwrite/coonfiguration';
 
 function String() {
   
-  const questions = [
-    { id: 0, title: 'Reverse the array', links: ['https://geeksforgeeks.org'] },
-    { id: 1, title: 'Find the maximum and minimum element in an array', links: ['https://geeksforgeeks.org'] },
-    { id: 2, title: 'Find the "Kth" max and min element of an array', links: ['https://geeksforgeeks.org'] },
-    { id: 3, title: 'Given an array which consists of only 0, 1 and 2. Sort the array without using any sorting algo', links: ['https://geeksforgeeks.org'] },
-    { id: 4, title: 'Move all the negative elements to one side of the array', links: ['https://geeksforgeeks.org'] },
-    { id: 5, title: 'Find the Union and Intersection of the two sorted arrays.', links: ['https://geeksforgeeks.org'] },
-  ];
+  const [questions, setQuestions] = useState([])
+  const [filteredQuestions, setFilteredQuestions] = useState([])
+  const [searchTerm, setSearchTerm] = useState('')
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchUserStringQuestion = async () => {
+       try {
+         const user = await authService.getCurrentUser();
+         if (user) {
+           const result = await service.stringQuestions(user.$id)
+           if (result && result.documents) {
+              setQuestions(result.documents)
+              setFilteredQuestions(result.documents)
+           }
+         }
+       } catch (error) {
+        console.error('Error fetching user or questions String:', error);
+      }
+      finally {
+        setLoading(false)
+       }
+    }
+    fetchUserStringQuestion()
+  })
 
 
-  const gfgIcon = 'https://upload.wikimedia.org/wikipedia/commons/4/43/GeeksforGeeks.svg';
-  const cnIcon = "https://i.ibb.co/RcQ5qLs/Coding-Ninjas-logo.jpg"
+  const handleSearchChange = (e) => {
+     const searchTerm = e.target.value;
+     setSearchTerm(searchTerm)
+
+     const filtered = questions.filter((question) => question.question.includes(searchTerm))
+     
+     setFilteredQuestions(filtered)
+  }
+
+
+  const handleCheckboxChange = async (e, questionId, completed) => {
+      e.stopPropagation();
+
+      setFilteredQuestions((preQues) =>
+       preQues.map((question) => question.$id === questionId ? {...question, completed} : question))
+
+      try {
+        await service.updateStringQuestionStatus(questionId, completed)
+      } catch (error) {
+        console.error('Error updating question status at String:', error);
+
+        setFilteredQuestions((preQues) =>
+          preQues.map((question) => question.$id === questionId ? {...question, completed} : question))
+      }
+  }
+
+
+  const pickRandom = () => {
+     const randomIndex = Math.ceil(Math.random() * questions.length)
+     const matchedQuestion = questions.find(question => question.serialNo === randomIndex)
+
+     if (matchedQuestion) {
+       window.open(matchedQuestion.titleDetails, "_blank")
+     }
+     else{
+      console.log('No question found with the generated random ID');
+     }
+  }
+
+
+  const getCompletedCount = () => {
+    const complete = filteredQuestions.filter((question) => question.completed).length;
+    return `${complete}/${questions.length} Done`;
+  };
 
 
   return (
     <>
-       <QuestionLayout title={'String'}  questions={questions} gfgIcon={gfgIcon} cnIcon={cnIcon}/>
+       <QuestionLayout 
+         title={'String'} 
+         getCompletedCount={getCompletedCount()} 
+         handleCheckboxChange={handleCheckboxChange}
+         pickRandom={pickRandom} 
+         questions={filteredQuestions}
+         searchTerm={searchTerm}
+         handleSearchChange={handleSearchChange} 
+         loading={loading}
+       />
     </>
   )
 }

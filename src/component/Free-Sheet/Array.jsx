@@ -23,7 +23,7 @@ function Array() {
           }
         }
       } catch (error) {
-        console.error('Error fetching user or questions:', error);
+        console.error('Error fetching user or questions Array:', error);
       }
       finally {
         setLoading(false)
@@ -52,7 +52,7 @@ function Array() {
       await service.updateArrayQuestionStatus(questionId, completed);
       console.log('clicked to service');
     } catch (error) {
-      console.error('Error updating question status:', error);
+      console.error('Error updating question status at Array:', error);
       
       setFilteredQuestions((prevQues) =>
         prevQues.map((ques) => ques.$id === questionId ? { ...ques, completed: !completed } : ques
