@@ -232,7 +232,7 @@ export class Service{
   try {
       const response = await this.databases.listDocuments(
           conf.appwriteDataBaseID,
-          conf.appwriteStringCollectionID,    
+          conf.appwriteStringCollectionID,  
           [
               Query.equal('userId', userId),
           ] 
