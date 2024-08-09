@@ -120,6 +120,9 @@ const AddQuestion = ({ question }) => {
               <MenuItem value="Array">Array</MenuItem>
               <MenuItem value="String">String</MenuItem>
               <MenuItem value="Linked List">Linked List</MenuItem>
+              <MenuItem value="Stack">Stack</MenuItem>
+              <MenuItem value="Recursion">Recursion</MenuItem>
+              <MenuItem value="Binary Tree">Binary Tree</MenuItem>
             </Select>
           </FormControl>
 
