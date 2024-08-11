@@ -27,7 +27,7 @@ function QuestionLayout({ getCompletedCount, questions, handleCheckboxChange, pi
                 <FaSearch className='absolute left-2 lg:left-4 top-1/2 transform -translate-y-1/2 text-gray-600 text-sm lg:text-lg' />
                 <input
                   type="text"
-                  placeholder="Search..."
+                  placeholder="Search Questions......"
                   value={searchTerm}
                   onChange={handleSearchChange}
                   className='border border-gray-600 w-full text-lg lg:text-lg p-5 lg:p-3 pl-9 lg:pl-12'

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { TextField, Box, Button, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
+import { TextField, Box, Button, Select, MenuItem, FormControl, InputLabel, TextareaAutosize } from '@mui/material';
 import { useForm, Controller } from 'react-hook-form';
 import service from '../Appwrite/coonfiguration';
 import authService from '../Appwrite/Authenticatioon';
@@ -20,6 +20,7 @@ const AddQuestion = ({ question }) => {
     defaultValues: {
       serialNo: question?.serialNo || '',
       Question: question?.Question || '',
+      description: question?.description || '',
       code: question?.code || '',
       link: question?.link || ''
     }
@@ -43,7 +44,7 @@ const AddQuestion = ({ question }) => {
     setLoading(true)
     setError('')
     try {
-      const { serialNo, Question, code, link } = data;
+      const { serialNo, Question, code, link, description } = data;
       console.log(data);
   
         if (question) {
@@ -51,20 +52,21 @@ const AddQuestion = ({ question }) => {
           try {
             const updatedQuestion = await service.updateQuestion(
               question.$id, 
-              { serialNo, Question, code, link }
+              { serialNo, Question, code, link, description }
             );
             navigate(`/question/${updatedQuestion.$id}`);
           } catch (error) {
             setError(error.message)
           }
         } 
-        else if (selectedTitle && serialNo.trim() && Question.trim() && code && link.trim()) {
+        else if (selectedTitle && serialNo.trim() && Question.trim() && code && link.trim() && description) {
           // Create new question
           try {
             const createdQuestion = await service.createQuestion({
               title: selectedTitle,
               serialNo: serialNo + ID.unique(),
               Question: Question,
+              description: description,
               code: code,
               link: link,
               userId: userId,
@@ -142,6 +144,31 @@ const AddQuestion = ({ question }) => {
             {...register("Question", { required: true })}
           />
 
+          <TextareaAutosize
+             minRows={2}
+             placeholder="Description"
+             aria-label="description textarea"
+             style={{
+              width: '100%',
+              marginTop: '16px',
+              marginBottom: '8px',
+              padding: '16.5px 14px',
+              borderRadius: '4px',
+              borderColor: 'rgba(0, 0, 0, 0.23)',
+              borderWidth: '1px',
+              borderStyle: 'solid',
+              fontSize: '16px',
+              fontFamily: 'Roboto, sans-serif',
+              boxSizing: 'border-box',
+              outline: 'none',
+              resize: 'vertical',
+              transition: 'border-color 0.2s ease-in-out',
+            }}
+            onFocus={(e) => e.target.style.borderColor = '#6B7280'}  
+            onBlur={(e) => e.target.style.borderColor = 'rgba(0, 0, 0, 0.23)'}
+            {...register("description", { required: true })}
+          />
+
           <TextField
             label="Online code Editor Link"
             variant="outlined"
@@ -158,7 +185,6 @@ const AddQuestion = ({ question }) => {
               <MonacoEditor {...field} control={control} />
             )}
           />
-
 
          <div className='flex justify-end gap-3 my-4'>
             <Button 

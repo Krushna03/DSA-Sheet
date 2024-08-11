@@ -15,14 +15,14 @@ export class Service{
 
 
     //Here link is the link of the coding ninjas platform
-    async createQuestion({serialNo, Question, code, link, userId, title, completed = false}){
+    async createQuestion({serialNo, Question, description, code, link, userId, title, completed = false}){
         try {
             return await this.databases.createDocument(
                conf.appwriteDataBaseID,
                conf.appwriteCollectionID,
                serialNo,
                 {
-                   Question, code, link, userId, title, completed
+                   Question, description, code, link, userId, title, completed
                 }
             )
         } catch (error) {
@@ -31,14 +31,14 @@ export class Service{
     }
 
 
-    async updateQuestion(serialNo, {Question, code, link}){
+    async updateQuestion(serialNo, {Question, code, link, description}){
         try {
             return await this.databases.updateDocument(
                 conf.appwriteDataBaseID,
                 conf.appwriteCollectionID,
                 serialNo, 
                 {
-                  Question, code, link
+                  Question, code, link, description
                 }
             )
         } catch (error) {

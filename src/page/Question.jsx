@@ -114,9 +114,13 @@ function Question() {
           </div>
         </div>
 
+        <div className='my-5 mx-2 lg:text-lg' style={{ whiteSpace: 'pre-wrap' }}>
+           {question.description}
+        </div>
+
         <div className="mb-5">
           <div className="prose prose-lg max-w-none">
-              <SyntaxHighlighter language="java" style={atomDark} className='text-sm lg:text-lg'>
+              <SyntaxHighlighter language="java" style={atomDark} className='text-sm lg:text-base'>
                 {question.code}
               </SyntaxHighlighter>
           </div>
