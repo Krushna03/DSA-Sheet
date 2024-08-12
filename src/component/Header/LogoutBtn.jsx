@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import authService from '../../Appwrite/Authenticatioon';
 import { logout } from '../../store/authSlice';
-import LogoutIcon from '@mui/icons-material/Logout'; // Importing the LogoutIcon from Material UI
+import LogoutIcon from '@mui/icons-material/Logout';
 
 function LogoutBtn() {
   const dispatch = useDispatch();
@@ -15,7 +15,7 @@ function LogoutBtn() {
 
   return (
     <button
-      className="inline-flex items-center lg:text-lg px-4 py-4 lg:px-7 lg:py-5 duration-200 hover:bg-gray-200 rounded-full text-zinc-950"
+      className="inline-block text-lg font-medium px-7 py-5 duration-200 hover:bg-gray-200 rounded-full text-zinc-950"
       onClick={logoutHandler}
     >
 

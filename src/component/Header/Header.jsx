@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, NavLink } from 'react-router-dom';
 import Logo from '../Logo';
 import LogoutBtn from './LogoutBtn';
 import { FaBars } from 'react-icons/fa';
+import { isAction } from '@reduxjs/toolkit';
 
 
 function Header() {
@@ -66,12 +67,13 @@ function Header() {
           {navItems.map((item) =>
             item.active ? (
               <li key={item.name}>
-                <button
-                  onClick={() => navigate(item.slug)}
-                  className="inline-block text-lg px-7 py-5 duration-200 hover:bg-gray-200 rounded-full text-zinc-950"
+                <NavLink to={item.slug}
+                  className={({isActive}) => 
+                    `${isActive ? 'text-blue-900' : 'text-zinc-950'} *:
+                     inline-block text-lg font-medium px-7 py-5 duration-200 hover:bg-gray-200 rounded-full`}
                 >
                   {item.name}
-                </button>
+                </NavLink>
               </li>
             ) : null
           )}
@@ -86,19 +88,17 @@ function Header() {
 
       {menuOpen && (
         <div className="lg:hidden md:hidden">
-          <ul className="flex flex-col items-start p-4">
+          <ul className="flex flex-col items-center p-4 border-t-4 border-b-0 mt-3">
             {navItems.map((item) =>
               item.active ? (
-                <li key={item.name} className="w-full">
-                  <button
-                    onClick={() => {
-                      navigate(item.slug);
-                      setMenuOpen(false);
-                    }}
-                    className="block w-full text-lg px-7 py-5 duration-200 hover:bg-gray-200 rounded-full text-zinc-950"
+                <li key={item.name} className="w-full text-center">
+                  <NavLink to={item.slug}
+                    onClick={() => setMenuOpen(false)}
+                    className={({isActive}) => 
+                      `${isActive ? 'text-blue-600' : 'text-zinc-950'} block w-full font-bold text-xl px-7 py-4 duration-200 hover:bg-gray-200 rounded-full`}
                   >
                     {item.name}
-                  </button>
+                  </NavLink>
                 </li>
               ) : null
             )}

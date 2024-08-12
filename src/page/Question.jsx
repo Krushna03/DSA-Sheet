@@ -47,7 +47,7 @@ function Question() {
 
 
     if (loading) {
-      return <div className="flex justify-center items-center h-screen">Loading...</div>;
+      return <div className="flex justify-center items-center h-screen text-xl">Loading...</div>;
     }
   
     if (!question) {
